@@ -15,10 +15,17 @@ Vous trouverez votre valeur avec la commande suivante, et changer si cela est ne
 echo "UID: ${UID}"
 ```
 
+Symofony se base égalment sur sa commande `bin/console` pour faire tourner le serveur de développement.
+
+ce fichier `console` est normalement un executable. Si vous êtes sous windows, il se peut que vous ayez des problème d’execution. Dans ce cas, préciser de l'executer avec `php`:
+```bash
+docker compose exec php php bin/console make
+```
+
 ## Prérequis
 Il faut respecter une de ces deux conditions:
 - `Docker` avec `docker compose`
-- `php8.2` avec les extension php`CType`, `iconv`, `session`, `simpleXML` et `Tokenizer`. Et bien sur `composer`
+- `php8.4` avec les extension php`CType`, `iconv`, `session`, `simpleXML` et `Tokenizer`. Et bien sur `composer`
 
 ## Installation
 Il suffi d'installer les depandance via composer
@@ -41,6 +48,15 @@ docker compose up
 Sans docker:  
 ```bash
 php -S 0.0.0.0:8080 -t public
+```
+
+## Lancement des tests
+```bash
+docker compose run --rm php composer run phpcs
+docker compose run --rm php composer run phpcs:fix
+```
+```bash
+docker compose run --rm php composer run phpcstan
 ```
 
 
